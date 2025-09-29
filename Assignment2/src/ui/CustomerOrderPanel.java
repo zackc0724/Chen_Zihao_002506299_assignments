@@ -26,19 +26,68 @@ public class CustomerOrderPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
+        lblFirstName = new javax.swing.JLabel();
+        lblLastName = new javax.swing.JLabel();
+        lblContact = new javax.swing.JLabel();
+        lblOrderID = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel1.setText("Add Customer and Order");
+
+        lblID.setText("Customer ID");
+
+        lblFirstName.setText("First Name");
+
+        lblLastName.setText("Last Name");
+
+        lblContact.setText("Contact");
+
+        lblOrderID.setText("Order ID");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblOrderID)
+                    .addComponent(lblContact)
+                    .addComponent(lblLastName)
+                    .addComponent(lblFirstName)
+                    .addComponent(lblID)
+                    .addComponent(jLabel1))
+                .addContainerGap(712, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(lblID)
+                .addGap(18, 18, 18)
+                .addComponent(lblFirstName)
+                .addGap(18, 18, 18)
+                .addComponent(lblLastName)
+                .addGap(18, 18, 18)
+                .addComponent(lblContact)
+                .addGap(18, 18, 18)
+                .addComponent(lblOrderID)
+                .addContainerGap(572, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblContact;
+    private javax.swing.JLabel lblFirstName;
+    private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblLastName;
+    private javax.swing.JLabel lblOrderID;
     // End of variables declaration//GEN-END:variables
 }

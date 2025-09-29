@@ -4,17 +4,35 @@
  */
 package ui;
 
+import model.ProductCatalog;
+import model.CustomerDirectory;
+import model.OrderDirectory;
+
 /**
  *
  * @author 80424
  */
 public class MainJFrame extends javax.swing.JFrame {
+    
+    private static final String CARD_CUSTOMER = "CUSTOMER";
+    private static final String CARD_PRODUCTS = "PRODUCTS";
+    private static final String CARD_SEARCH   = "SEARCH";
+    private static final String CARD_ORDERS   = "ORDERS";
+    private java.awt.CardLayout cardLayout;
 
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents();
+    workArea.setLayout(new java.awt.CardLayout());
+    cardLayout = (java.awt.CardLayout) workArea.getLayout();
+    workArea.add(new CustomerOrderPanel(productCatalog, customerDirectory, orderDirectory), CARD_CUSTOMER);
+    workArea.add(new ProductsPanel(productCatalog), CARD_PRODUCTS);
+    workArea.add(new SearchPanel(productCatalog, customerDirectory, orderDirectory), CARD_SEARCH);
+    workArea.add(new OrderListPanel(productCatalog, customerDirectory, orderDirectory), CARD_ORDERS);
+        
+        showCard("PRODUCTS");
     }
 
     /**
@@ -27,41 +45,116 @@ public class MainJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        controlPanel = new javax.swing.JPanel();
+        btnAddCustomer = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
+        btnManageProducts = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        btnOrderList = new javax.swing.JButton();
+        workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        controlPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnAddCustomer.setText("Add Customer + Order");
+        btnAddCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddCustomerActionPerformed(evt);
+            }
+        });
+
+        lblTitle.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
+        lblTitle.setText("Coffee POS");
+
+        btnManageProducts.setText("Manage Products");
+        btnManageProducts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageProductsActionPerformed(evt);
+            }
+        });
+
+        btnSearch.setText("Search Customers");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        btnOrderList.setText("List Orders");
+        btnOrderList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrderListActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
+        controlPanel.setLayout(controlPanelLayout);
+        controlPanelLayout.setHorizontalGroup(
+            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(controlPanelLayout.createSequentialGroup()
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(controlPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblTitle))
+                    .addGroup(controlPanelLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAddCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnManageProducts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 772, Short.MAX_VALUE)
+        controlPanelLayout.setVerticalGroup(
+            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(controlPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitle)
+                .addGap(36, 36, 36)
+                .addComponent(btnAddCustomer)
+                .addGap(30, 30, 30)
+                .addComponent(btnManageProducts)
+                .addGap(30, 30, 30)
+                .addComponent(btnSearch)
+                .addGap(26, 26, 26)
+                .addComponent(btnOrderList)
+                .addContainerGap(518, Short.MAX_VALUE))
         );
 
-        jSplitPane1.setLeftComponent(jPanel1);
+        jSplitPane1.setLeftComponent(controlPanel);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1104, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 772, Short.MAX_VALUE)
-        );
-
-        jSplitPane1.setRightComponent(jPanel2);
+        workArea.setBackground(new java.awt.Color(204, 204, 204));
+        workArea.setLayout(new java.awt.CardLayout());
+        jSplitPane1.setRightComponent(workArea);
 
         getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
+        // TODO add your handling code here:
+        cardLayout.show(workArea, CARD_CUSTOMER);
+
+    }//GEN-LAST:event_btnAddCustomerActionPerformed
+
+    private void btnManageProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageProductsActionPerformed
+        // TODO add your handling code here:
+        cardLayout.show(workArea, CARD_PRODUCTS);
+    }//GEN-LAST:event_btnManageProductsActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        cardLayout.show(workArea, CARD_SEARCH);
+
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnOrderListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderListActionPerformed
+        // TODO add your handling code here:
+        cardLayout.show(workArea, CARD_ORDERS);
+
+    }//GEN-LAST:event_btnOrderListActionPerformed
 
     /**
      * @param args the command line arguments
@@ -90,7 +183,6 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainJFrame().setVisible(true);
@@ -99,8 +191,21 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton btnAddCustomer;
+    private javax.swing.JButton btnManageProducts;
+    private javax.swing.JButton btnOrderList;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JPanel controlPanel;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables
+
+    private void showCard(String products) {
+        java.awt.CardLayout cl = (java.awt.CardLayout) workArea.getLayout();
+        cl.show(workArea, cardName);
+    }
+    
+    private void btnManageProductsActionPerformed(java.awt.event.ActionEvent evt) {
+    showCard("PRODUCTS");
 }
