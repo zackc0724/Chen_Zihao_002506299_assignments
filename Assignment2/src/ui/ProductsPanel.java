@@ -4,6 +4,13 @@
  */
 package ui;
 
+import model.Product;
+import model.ProductCatalog;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+import model.CustomerDirectory;
+import model.OrderDirectory;
+
 /**
  *
  * @author 80424
@@ -15,6 +22,14 @@ public class ProductsPanel extends javax.swing.JPanel {
      */
     public ProductsPanel() {
         initComponents();
+        productCatalog = new ProductCatalog();
+        customerDirectory = new CustomerDirectory();
+        orderDirectory = new OrderDirectory();
+        
+        workArea.add(new ProductsPanel(productCatalog), "PRODUCTS");
+        workArea.add(new CustomerOrderPanel(productCatalog, customerDirectory, orderDirectory), "CUSTOMER");
+        workArea.add(new SearchPanel(productCatalog, customerDirectory, orderDirectory), "SEARCH");
+        workArea.add(new OrderListPanel(productCatalog, customerDirectory, orderDirectory), "ORDERS");
     }
 
     /**
