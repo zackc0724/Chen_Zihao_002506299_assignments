@@ -31,6 +31,13 @@ public class ProductsPanel extends javax.swing.JPanel {
         workArea.add(new SearchPanel(productCatalog, customerDirectory, orderDirectory), "SEARCH");
         workArea.add(new OrderListPanel(productCatalog, customerDirectory, orderDirectory), "ORDERS");
     }
+    
+    private void showCard(String cardName) {
+        java.awt.CardLayout cl = (java.awt.CardLayout) workArea.getLayout();
+        cl.show(workArea, cardName);
+    }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
