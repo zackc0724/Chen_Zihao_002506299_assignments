@@ -1,0 +1,54 @@
+package ui.admin;
+
+import business.EcoSystem;
+import business.org.Branch;
+import java.awt.BorderLayout;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+public class ManageBranchesPanel extends JPanel {
+    private final EcoSystem system;
+    private final DefaultTableModel model = new DefaultTableModel(new Object[]{"Name","Library #","Manager"},0);
+    private final JTable table = new JTable(model);
+    private final JTextField txtName = new JTextField(12);
+    private final JSpinner spLib = new JSpinner(new SpinnerNumberModel(100,1,9999,1));
+
+    public ManageBranchesPanel(javax.swing.JPanel cardPanel, EcoSystem system) {
+        this.system = system;
+        setLayout(new BorderLayout());
+        add(new JScrollPane(table), BorderLayout.CENTER);
+
+        JPanel south = new JPanel();
+        south.add(new JLabel("Name:")); south.add(txtName);
+        south.add(new JLabel("Library #:")); south.add(spLib);
+        JButton btnAdd = new JButton("Add");
+        JButton btnDelete = new JButton("Delete Selected");
+        south.add(btnAdd); south.add(btnDelete);
+        add(south, BorderLayout.SOUTH);
+
+        btnAdd.addActionListener(e -> {
+            String name = txtName.getText().trim();
+            int lib = (int) spLib.getValue();
+            if(name.isEmpty()) { JOptionPane.showMessageDialog(this,"Enter name"); return; }
+            system.getBranchDirectory().add(new Branch(name, lib));
+            refresh();
+        });
+        btnDelete.addActionListener(e -> {
+            int row = table.getSelectedRow();
+            if(row<0) { JOptionPane.showMessageDialog(this,"Select a row"); return; }
+            Branch b = system.getBranchDirectory().getList().get(row);
+            system.getBranchDirectory().remove(b);
+            refresh();
+        });
+
+        refresh();
+    }
+
+    private void refresh() {
+        model.setRowCount(0);
+        for (Branch b : system.getBranchDirectory().getList()) {
+            model.addRow(new Object[]{ b.getName(), b.getLibrary().getBuildingNo(), 
+                b.getBranchManager()!=null?b.getBranchManager().getName():"(none)"});
+        }
+    }
+}
