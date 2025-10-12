@@ -38,7 +38,7 @@ public final class ConfigureTheBusiness {
         books.add(new Book("The Three-Body Problem", LocalDate.now().minusYears(3), 416, "English", a3, b2));
 
         Customer c1 = cd.add(new Customer("Zihao Chen"));
-        Customer c2 = cd.add(new Customer("Ana Silva"));
+        Customer c2 = cd.add(new Customer("Leo Wang"));
         Customer c3 = cd.add(new Customer("Sam Patel"));
         Customer c4 = cd.add(new Customer("Maria Garcia"));
         Customer c5 = cd.add(new Customer("Ethan Wang"));
