@@ -94,6 +94,9 @@ public class ManageBooksPanel extends JPanel {
 
         txtName.setText(""); txtLang.setText(""); spPages.setValue(300);
         refresh();
+        
+        if (pages <= 0) { JOptionPane.showMessageDialog(this, "Pages must be > 0"); return; }
+        if (lang.isEmpty()) { JOptionPane.showMessageDialog(this, "Language is required"); return; }
     }
 
     private void refresh() {
