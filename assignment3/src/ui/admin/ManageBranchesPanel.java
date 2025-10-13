@@ -38,12 +38,14 @@ public class ManageBranchesPanel extends JPanel {
         });
         btnDelete.addActionListener(e -> {
             int row = table.getSelectedRow();
-            if(row<0) { JOptionPane.showMessageDialog(this,"Select a row"); return; }
+            if(row < 0) { JOptionPane.showMessageDialog(this,"Select a row"); return; }
+            int ok = JOptionPane.showConfirmDialog(this, "Delete selected branch?", "Confirm", JOptionPane.OK_CANCEL_OPTION);
+            if (ok != JOptionPane.OK_OPTION) return;
+
             Branch b = system.getBranchDirectory().getList().get(row);
             system.getBranchDirectory().remove(b);
             refresh();
         });
-        refresh();
 
         UI.addLogoutBar(this, cardPanel, system);
     }
