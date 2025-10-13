@@ -46,7 +46,7 @@ public class ManageUserAccountsPanel extends JPanel {
         btnAdd.addActionListener(e -> {
             String u = txtUser.getText().trim();
             String p = txtPass.getText().trim();
-            if(u.isEmpty()||p.isEmpty()) return;
+            if(u.isEmpty() || p.isEmpty()) { JOptionPane.showMessageDialog(this, "Username and password required"); return; }
             UserAccount ua;
             switch((String)cmbRole.getSelectedItem()) {
                 case "BranchManager":
