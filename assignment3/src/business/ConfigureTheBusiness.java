@@ -44,9 +44,9 @@ public final class ConfigureTheBusiness {
         Customer c5 = cd.add(new Customer("Ethan Wang"));
 
         uad.add(new UserAccount("admin", "admin", new SystemAdminRole()));
-        UserAccount mu1 = uad.add(new UserAccount("mgr1", "mgr1", new BranchManagerRole()));
+        UserAccount mu1 = uad.add(new UserAccount("mgr_seattle", "1234", new BranchManagerRole()));
         mu1.setEmployee(m1);
-        UserAccount mu2 = uad.add(new UserAccount("mgr2", "mgr2", new BranchManagerRole()));
+        UserAccount mu2 = uad.add(new UserAccount("mgr_boston", "1234", new BranchManagerRole()));
         mu2.setEmployee(m2);
 
         UserAccount cu1 = uad.add(new UserAccount("c1", "c1", new CustomerRole())); cu1.setCustomer(c1);
