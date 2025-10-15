@@ -1,6 +1,6 @@
 package com.cafe.ui;
 
-import com.cafe.directory.ProductCatalog;
+import cafe.directory.ProductCatalog;
 import com.cafe.model.Category;
 import com.cafe.model.Product;
 import com.cafe.util.Validators;

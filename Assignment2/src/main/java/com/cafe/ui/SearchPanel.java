@@ -1,8 +1,8 @@
 package com.cafe.ui;
 
-import com.cafe.directory.CustomerDirectory;
-import com.cafe.directory.OrderDirectory;
-import com.cafe.directory.ProductCatalog;
+import cafe.directory.CustomerDirectory;
+import cafe.directory.OrderDirectory;
+import cafe.directory.ProductCatalog;
 import com.cafe.model.Customer;
 import com.cafe.model.Order;
 import com.cafe.model.Product;

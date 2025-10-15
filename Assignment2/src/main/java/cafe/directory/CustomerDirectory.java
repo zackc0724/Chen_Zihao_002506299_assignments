@@ -1,4 +1,4 @@
-package com.cafe.directory;
+package cafe.directory;
 
 import com.cafe.model.Customer;
 import java.util.*;
